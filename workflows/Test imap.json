@@ -1,0 +1,45 @@
+{
+  "active": false,
+  "connections": {
+    "Email Trigger (IMAP)": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-02-17T11:04:08.439Z",
+  "id": "3",
+  "name": "Test imap",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "forceReconnect": 60
+        }
+      },
+      "id": "bddcc6ca-a4bc-4031-9a6c-d7bbf4592e49",
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        820,
+        480
+      ],
+      "executeOnce": false,
+      "alwaysOutputData": false,
+      "credentials": {
+        "imap": {
+          "id": "1",
+          "name": "IMAP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-02-17T11:29:49.000Z",
+  "versionId": "56790753-f3a6-4dac-bce9-ab940e784012"
+}
