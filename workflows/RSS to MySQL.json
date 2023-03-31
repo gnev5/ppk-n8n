@@ -1,0 +1,151 @@
+{
+  "active": false,
+  "connections": {
+    "MySQL": {
+      "main": [
+        [
+          {
+            "node": "RSS Read1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read1": {
+      "main": [
+        []
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-28T11:16:31.473Z",
+  "id": "29",
+  "name": "RSS to MySQL",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select * from rss_list where id = 1"
+      },
+      "id": "6ee5b17e-af2d-41ed-9fd6-ae081f6e86c9",
+      "name": "MySQL",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        140
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "11",
+          "name": "ppk"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.link }}"
+      },
+      "id": "6e5ee3b0-b6a6-4f73-beeb-dc5242bd7cb3",
+      "name": "RSS Read1",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "limit",
+        "maxItems": 5
+      },
+      "id": "b72ad090-e9ef-430f-b09f-8fde38c3ff4f",
+      "name": "Item Lists2",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        -140,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "notreplay@ppkmh.ru",
+        "toEmail": "aavdeev@ppkmh.ru",
+        "subject": "News",
+        "text": "={{ $json.title }}\n{{ $json[\"content\"] }}\n{{ $json[\"link\"] }}\n",
+        "options": {}
+      },
+      "id": "5f565a52-c818-4399-8b4d-d87d3010c03c",
+      "name": "Send Email1",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        -440,
+        -160
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "15",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "09e91ae5-c973-4935-ae8e-895a9cbd937c",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        140
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "timezone": "Europe/Moscow",
+    "saveExecutionProgress": "DEFAULT",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-03-21T12:50:32.972Z",
+      "updatedAt": "2023-03-21T12:50:32.972Z",
+      "id": "7",
+      "name": "RSS"
+    },
+    {
+      "createdAt": "2023-03-21T12:50:49.050Z",
+      "updatedAt": "2023-03-21T12:50:49.050Z",
+      "id": "9",
+      "name": "SendMail"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-03-28T12:21:55.000Z",
+  "versionId": "55d8d987-43a7-460d-97ae-a8aeda9c6061"
+}
