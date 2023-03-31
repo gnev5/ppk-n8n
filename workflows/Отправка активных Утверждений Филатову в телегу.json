@@ -1,0 +1,420 @@
+{
+  "active": false,
+  "connections": {
+    "Item Lists2": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Филатову_кнопки",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Авдееву3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Авдееву",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Филатову",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Лукину",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "запрос заданий Филатова",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "запрос заданий Филатова": {
+      "main": [
+        [
+          {
+            "node": "Item Lists2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-23T14:41:45.081Z",
+  "id": "23",
+  "name": "Отправка активных Утверждений Филатову в телегу",
+  "nodes": [
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "tgMsg",
+              "value": "={{ $json.NAME }}\n{{ $json.DESCRIPTION }}\n Утвердить: /ComOK_{{ $json.ID }} | Отклонить: /ComReject_{{ $json.ID }}  "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "815da0f6-d333-4afd-b932-7be6627b1075",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        1200
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "result",
+        "options": {}
+      },
+      "id": "5fb419f6-7d8d-412c-8058-8d6a337d6d37",
+      "name": "Item Lists2",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        -640,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "triggerAtMinute": 30
+            }
+          ]
+        }
+      },
+      "id": "bf2a302e-74d1-4ebe-91b5-a1dd8adb3575",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -840,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "446260098",
+        "text": "={{ $json.tgMsg }}",
+        "additionalFields": {}
+      },
+      "id": "71492f62-8a89-4abe-a4b2-b1bc6fb50dc3",
+      "name": "Филатову",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        1200
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "399224802",
+        "text": "={{ $json.tgMsg }}",
+        "additionalFields": {}
+      },
+      "id": "d8df1864-15b1-43c9-b47f-412554598554",
+      "name": "Авдееву",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        1380
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/bizproc.task.list/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"SELECT\": [\"ID\",\"DESCRIPTION\",\"STATUS\",\"NAME\",\"USER_ID\",\"ACTIVITY\",\"FIELDS\"], \"FILTER\": {\"USER_ID\": 4, \"USER_STATUS\": 0}}",
+        "options": {}
+      },
+      "id": "90a266cc-633d-4578-a5b8-23aca2adc243",
+      "name": "запрос заданий Филатова",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -840,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "397372757",
+        "text": "={{ $json.tgMsg }}",
+        "additionalFields": {}
+      },
+      "id": "99685fd9-2321-4a2f-bb27-fb6212f8e8a5",
+      "name": "Лукину",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        1560
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "446260098",
+        "text": "=Андрей Евгеньевич, напоминаю Вам, что нужно {{ $json.NAME }}\n{{ $json.DESCRIPTION }}",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Утвердить",
+                    "additionalFields": {
+                      "callback_data": "=/ComOK_{{ $json.ID }}"
+                    }
+                  },
+                  {
+                    "text": "Отклонить",
+                    "additionalFields": {
+                      "callback_data": "=/ComReject_{{ $json.ID }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {}
+      },
+      "id": "1411be54-a1fb-41df-ac03-357cb998bcc3",
+      "name": "Авдееву3",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        1620
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "446260098",
+        "text": "=Андрей Евгеньевич, напоминаю Вам, что нужно {{ $json.NAME }}\n{{ $json.DESCRIPTION }}",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Утвердить",
+                    "additionalFields": {
+                      "callback_data": "=/ComOK_{{ $json.ID }}"
+                    }
+                  },
+                  {
+                    "text": "Отклонить",
+                    "additionalFields": {
+                      "callback_data": "=/ComReject_{{ $json.ID }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {}
+      },
+      "id": "725b959b-aefc-480a-b268-574fbe7c6281",
+      "name": "Филатову_кнопки",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        1440
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "deleteMessage",
+        "chatId": "399224802",
+        "messageId": "155"
+      },
+      "id": "81434e1a-e84b-4e2c-a7ae-eeec8603a255",
+      "name": "Удалить сообщение",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -1100,
+        1500
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "chatId": "399224802"
+      },
+      "id": "7eda5dc5-62f8-43bd-9f46-8d14afc75b56",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -1340,
+        1060
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "446260098",
+        "text": "=Андрей Евгеньевич, прошу пока не нажимать, донастраиваю процесс.",
+        "additionalFields": {}
+      },
+      "id": "b3dc159f-9dd1-4f7b-89bf-ed9c8e8c9b6a",
+      "name": "Филатову_",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -1220,
+        1260
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "399224802",
+        "text": "=Андрей Евгеньевич, прошу пока не нажимать, донастраиваю процесс.",
+        "additionalFields": {}
+      },
+      "id": "05cfad06-9952-4ca5-af50-05b9d82cc3ca",
+      "name": "Авдееву1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -1300,
+        1440
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      },
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrencyRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2023-03-10T17:32:23.736Z",
+      "updatedAt": "2023-03-10T17:32:23.736Z",
+      "id": "1",
+      "name": "Bitrix"
+    },
+    {
+      "createdAt": "2023-03-10T17:32:39.205Z",
+      "updatedAt": "2023-03-10T17:32:39.205Z",
+      "id": "3",
+      "name": "Telegramm"
+    },
+    {
+      "createdAt": "2023-03-23T15:54:49.079Z",
+      "updatedAt": "2023-03-23T12:55:38.311Z",
+      "id": "13",
+      "name": "!PRD"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-03-29T17:43:00.000Z",
+  "versionId": "2c8838b4-7cf5-4d22-aca8-b9afc49804bd"
+}
