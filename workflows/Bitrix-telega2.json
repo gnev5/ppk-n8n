@@ -1,0 +1,500 @@
+{
+  "active": false,
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "MySQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL1": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "Set2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set2": {
+      "main": [
+        [
+          {
+            "node": "MySQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "MySQL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [
+          {
+            "node": "Запрос номера задачи1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MySQL2": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch3": {
+      "main": [
+        [],
+        [],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Сообщить название задачи",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Сообщить название задачи": {
+      "main": [
+        [
+          {
+            "node": "MySQL3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-13T10:57:03.890Z",
+  "id": "9",
+  "name": "Bitrix-telega2",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "*"
+        ],
+        "additionalFields": {}
+      },
+      "id": "b97e3ad7-f77b-4a71-a669-0c38a9fbf2e2",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1640,
+        -180
+      ],
+      "webhookId": "4f257f16-d035-42db-aaa9-daaf8eaf909e",
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=select chat_id,user_id,process,step from ppkmh_tg_session where chat_id = {{ $node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"] }}"
+      },
+      "id": "548a3f63-1062-45f1-bf4b-98c0e1d89dd4",
+      "name": "MySQL1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -1420,
+        -180
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "mySql": {
+          "id": "11",
+          "name": "ppk"
+        }
+      },
+      "notes": "проверяем активную сессию"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json[\"process\"] }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "607a50ed-a430-4c81-8fe7-92b4d81b16d1",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -1280,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "number": [
+            {
+              "name": "chat_id",
+              "value": "={{ $node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"] }}"
+            },
+            {
+              "name": "user_id",
+              "value": "={{ $node[\"Telegram Trigger\"].json[\"message\"][\"from\"][\"id\"] }}"
+            },
+            {
+              "name": "step"
+            }
+          ],
+          "string": [
+            {
+              "name": "process",
+              "value": "={{ $node[\"Telegram Trigger\"].json[\"message\"][\"text\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7a851b00-3571-474b-9b7b-a3b2744f58a2",
+      "name": "Set2",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        -340
+      ]
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "ppkmh_tg_session",
+          "mode": "name"
+        },
+        "columns": "=chat_id,user_id,process,step",
+        "options": {}
+      },
+      "id": "a48236c5-c07b-4ad6-957d-47907d791944",
+      "name": "MySQL2",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        -340
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "11",
+          "name": "ppk"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $node[\"Telegram Trigger\"].json[\"message\"][\"text\"] }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "/help",
+              "output": 1
+            },
+            {
+              "value2": "/taskinfo",
+              "output": 2
+            },
+            {
+              "value2": "/tasklist",
+              "output": 3
+            }
+          ]
+        },
+        "fallbackOutput": 0
+      },
+      "id": "c47287b5-057f-42b6-a671-ffebd64ba28f",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        -340
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "Введите номер задачи:",
+        "additionalFields": {}
+      },
+      "id": "702d6b0a-6517-4108-9379-13bdd40561a3",
+      "name": "Запрос номера задачи1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -340
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $node[\"MySQL1\"].json[\"process\"] }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "/help",
+              "output": 1
+            },
+            {
+              "value2": "/taskinfo",
+              "output": 2
+            },
+            {
+              "value2": "/tasklist",
+              "output": 3
+            }
+          ]
+        },
+        "fallbackOutput": 0
+      },
+      "id": "9c3d93e3-6674-4a27-8c20-45dee5fdde7a",
+      "name": "Switch3",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -1080,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://test-desk.ppkmh.ru/rest/3/k0jvyoyykyzpghxh/task.item.getdata.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "TASKID",
+              "value": "={{ $node[\"Telegram Trigger\"].json[\"message\"][\"text\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "39f57d42-0b72-4175-b816-0c9affcfd727",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -860,
+        -140
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "={{ $json[\"result\"][\"ID\"] }} -  {{ $json[\"result\"][\"TITLE\"] }}\nОтветственный: {{ $node[\"HTTP Request\"].json[\"result\"][\"RESPONSIBLE_LAST_NAME\"] }}{{ $node[\"HTTP Request\"].json[\"result\"][\"RESPONSIBLE_NAME\"] }}{{ $node[\"HTTP Request\"].json[\"result\"][\"RESPONSIBLE_SECOND_NAME\"] }}\nСрок: {{ $node[\"HTTP Request\"].json[\"result\"][\"DEADLINE\"] }}",
+        "additionalFields": {}
+      },
+      "id": "95d62b56-8def-4b51-b34b-e85d59e6ef78",
+      "name": "Сообщить название задачи",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        -140
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=delete FROM ppkmh_tg_session where chat_id = {{ $node[\"MySQL1\"].json[\"chat_id\"] }} AND user_id = {{ $node[\"MySQL1\"].json[\"user_id\"] }}"
+      },
+      "id": "7afe3c0b-888d-4f99-ac89-4493456a520c",
+      "name": "MySQL3",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -520,
+        -140
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "11",
+          "name": "ppk"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=delete FROM ppk.ppkmh_tg_session where chat_id = {{ $node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"] }} and user_id = {{ $node[\"Telegram Trigger\"].json[\"message\"][\"from\"][\"id\"] }}"
+      },
+      "id": "d68cb105-2199-4bf0-bc2e-ea8aa799b268",
+      "name": "MySQL",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -520
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "11",
+          "name": "ppk"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "*"
+        ],
+        "additionalFields": {}
+      },
+      "id": "7831d4f5-7d09-4850-b146-b2b1a00d2b2a",
+      "name": "Telegram Trigger1",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1640,
+        -400
+      ],
+      "webhookId": "b8b630e7-08e2-4864-ace6-014f430addce",
+      "credentials": {
+        "telegramApi": {
+          "id": "13",
+          "name": "ppk_test1"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://test-desk.ppkmh.ru/rest/3/k0jvyoyykyzpghxh/task.item.getdata.json",
+        "sendBody": true,
+        "specifyBody": "json",
+        "options": {}
+      },
+      "id": "0e9b63ee-4829-4cde-a1fa-aa4b7547bd9e",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -1160,
+        -600
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://test-desk.ppkmh.ru/rest/3/k0jvyoyykyzpghxh/task.item.getdata.json?taskId=1434&select[0]=ID&select[1]=TITLE",
+        "options": {}
+      },
+      "id": "0835faed-2d3b-4e87-9a74-a906c1c2fb46",
+      "name": "HTTP Request2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -1400,
+        -600
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "timezone": "Europe/Moscow",
+    "saveExecutionProgress": "DEFAULT",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-03-10T17:32:23.736Z",
+      "updatedAt": "2023-03-10T17:32:23.736Z",
+      "id": "1",
+      "name": "Bitrix"
+    },
+    {
+      "createdAt": "2023-03-10T17:32:39.205Z",
+      "updatedAt": "2023-03-10T17:32:39.205Z",
+      "id": "3",
+      "name": "Telegramm"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-03-20T18:02:33.000Z",
+  "versionId": "ab85a1ab-bb19-4bca-8190-8bd48aa289bd"
+}
