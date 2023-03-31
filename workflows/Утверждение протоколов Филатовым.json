@@ -1,0 +1,710 @@
+{
+  "active": true,
+  "connections": {
+    "tgTrigger": {
+      "main": [
+        [
+          {
+            "node": "Записать сессию",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Записать сессию": {
+      "main": [
+        [
+          {
+            "node": "insert session1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Switch3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set1": {
+      "main": [
+        [
+          {
+            "node": "Switch4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Отклонить задание в Битрикс24": {
+      "main": [
+        [
+          {
+            "node": "Telegram2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Утвердить задание в Битрикс. Авдеев": {
+      "main": [
+        []
+      ]
+    },
+    "Утвердить задание в Битрикс24. Филатов": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Отклонить задание в Битрикс": {
+      "main": [
+        []
+      ]
+    },
+    "Параметры вебхука PROD": {
+      "main": [
+        [
+          {
+            "node": "Установить вебхук для телеграмм бота",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch3": {
+      "main": [
+        [
+          {
+            "node": "Утвердить задание в Битрикс. Авдеев",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Утвердить задание в Битрикс24. Филатов",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch4": {
+      "main": [
+        [
+          {
+            "node": "Утвердить задание в Битрикс. Авдеев",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Отклонить задание в Битрикс24",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-23T16:03:27.964Z",
+  "id": "27",
+  "name": "Утверждение протоколов Филатовым",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://api.telegram.org/bot{{ $json[\"TelegrammToken\"] }}/setwebhook?url={{ $json[\"WebHookUrl\"] }}",
+        "options": {}
+      },
+      "id": "52fd3f30-9222-4dbb-826b-ea025e7174a4",
+      "name": "Установить вебхук для телеграмм бота",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -1480,
+        -1140
+      ]
+    },
+    {
+      "parameters": {
+        "updates": [
+          "*"
+        ],
+        "additionalFields": {}
+      },
+      "id": "3755802c-cc6f-4871-83f6-16af7328143b",
+      "name": "tgTrigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1740,
+        -680
+      ],
+      "webhookId": "d84e92e7-3dab-4b85-a542-c1141a2cb2d6",
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "number": [
+            {
+              "name": "chat_id",
+              "value": "={{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}{{ $json.callback_query.message.chat.id }}"
+            },
+            {
+              "name": "user_id",
+              "value": "={{ $node[\"tgTrigger\"].json[\"message\"][\"from\"][\"id\"] }}{{ $json.callback_query.from.id }}"
+            }
+          ],
+          "string": [
+            {
+              "name": "msg",
+              "value": "=text = {{ $json.message.text }}{{ $json.callback_query.data }}\nmessage_id = {{ $json.message.message_id }}{{ $json.callback_query.message.message_id }}\nfrom.id = {{ $json.message.from.id }}{{ $json.callback_query.from.id }}\nfrom.first_name =  {{ $json.message.from.first_name }}{{ $json.callback_query.from.first_name }}\nfrom.last_name = {{ $json.message.from.last_name }}{{ $json.callback_query.from.last_name }}\nfrom.username = {{ $json.message.from.username }}{{ $json.callback_query.from.username }}\nchat.id = {{ $json.message.chat.id }}{{ $json.callback_query.message.chat.id }}\nchat.type = {{ $json.message.chat.type }}{{ $json[\"callback_query\"][\"message\"][\"chat\"][\"type\"] }}      "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ddac0d79-0b05-4c87-99d9-acb4bc202ec0",
+      "name": "Записать сессию",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -1540,
+        -800
+      ]
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "ppk.ppkmh_tg_msg_log",
+          "mode": "name"
+        },
+        "columns": "=chat_id,user_id,msg",
+        "options": {}
+      },
+      "id": "a3dd89a8-c875-4625-9f09-d2c1a03bb52c",
+      "name": "insert session1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -1400,
+        -800
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "11",
+          "name": "ppk"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.callback_query.data }}{{ $json.message.text }}",
+        "rules": {
+          "rules": [
+            {
+              "value2": "/start",
+              "output": 1
+            },
+            {
+              "operation": "startsWith",
+              "value2": "/ComOK_",
+              "output": 2
+            },
+            {
+              "operation": "startsWith",
+              "value2": "/ComReject_",
+              "output": 3
+            }
+          ]
+        },
+        "fallbackOutput": 0
+      },
+      "id": "9ca15cc1-a73c-4562-98ed-96607100ab8a",
+      "name": "Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -1540,
+        -600
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "TelegrammToken",
+              "value": "6141831376:AAEB2V4s5yCEb1rXFy2UD0AGUNIKgc_WX20"
+            },
+            {
+              "name": "WebHookUrl",
+              "value": "https://n8n.ppkmh.ru/webhook/d84e92e7-3dab-4b85-a542-c1141a2cb2d6/webhook"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e67d961c-a088-4f63-9db2-749f52b714df",
+      "name": "Параметры вебхука PROD",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -1740,
+        -1200
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "TelegrammToken",
+              "value": "6141831376:AAEB2V4s5yCEb1rXFy2UD0AGUNIKgc_WX20"
+            },
+            {
+              "name": "WebHookUrl",
+              "value": "https://n8n.ppkmh.ru/webhook-test/d84e92e7-3dab-4b85-a542-c1141a2cb2d6/webhook"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3434f4bd-b70e-49b1-a252-4b452e2b403c",
+      "name": "Параметры вебхука TEST",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -1740,
+        -1040
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "Молодец! Бот тебя запомнил.",
+        "additionalFields": {}
+      },
+      "id": "04cfe16e-ed2f-48f5-8327-0417af0767d8",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -1300,
+        -700
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "number": [
+            {
+              "name": "TaskID",
+              "value": "={{ $json.callback_query.data.substring(7) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c8700ba0-fb0f-4c81-9349-02d5b0d0e242",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -1300,
+        -540
+      ]
+    },
+    {
+      "parameters": {
+        "values": {
+          "number": [
+            {
+              "name": "TaskID",
+              "value": "={{ $json[\"message\"][\"text\"].substring(11) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "50d8d668-a93e-441e-bc8f-4d65bd5c465f",
+      "name": "Set1",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -1300,
+        -360
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://desk.ppkmh.ru/rest/4/9ff4n7fnh0fy9ikv/bizproc.task.complete/",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "TASK_ID",
+              "value": "={{ $json.TaskID }}"
+            },
+            {
+              "name": "STATUS",
+              "value": "2"
+            },
+            {
+              "name": "COMMENT",
+              "value": "Прошу исправить протокол"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "9b2205a8-936b-441d-966b-8ec327a6a192",
+      "name": "Отклонить задание в Битрикс24",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -940,
+        -360
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "=Протокол комитета утвержден.",
+        "additionalFields": {}
+      },
+      "id": "24549746-69d1-4692-ad99-a960b3277816",
+      "name": "Telegram1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -700,
+        -540
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "=Протокол комитета отклонен.",
+        "additionalFields": {}
+      },
+      "id": "ef5e2228-c061-4cdc-a493-0575df51c2ac",
+      "name": "Telegram2",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -700,
+        -360
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/bizproc.task.complete/",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "TASK_ID",
+              "value": "={{ $json.TaskID }}"
+            },
+            {
+              "name": "STATUS",
+              "value": "2"
+            },
+            {
+              "name": "COMMENT",
+              "value": "Прошу исправить протокол"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "55b93b0e-d477-4ec5-848f-cba19c7db99e",
+      "name": "Отклонить задание в Битрикс",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -940,
+        -860
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Используется Токен Филатова",
+        "height": 460.1979000000001,
+        "width": 241.17999999999995
+      },
+      "id": "38d17683-fb94-46ac-95f6-5752e6350fb7",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1000,
+        -620
+      ]
+    },
+    {
+      "parameters": {
+        "value1": "={{ $json.callback_query.message.chat.id }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "equal",
+              "value2": "399224802"
+            },
+            {
+              "operation": "equal",
+              "value2": "446260098 ",
+              "output": 1
+            }
+          ]
+        },
+        "fallbackOutput": 3
+      },
+      "id": "1a82c21e-de85-4a6d-b84e-9a0297e31085",
+      "name": "Switch1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -1620,
+        -100
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/bizproc.task.complete/",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "TASK_ID",
+              "value": "={{ $json.TaskID }}"
+            },
+            {
+              "name": "STATUS",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3a2c036d-c357-473e-af63-429a82c5ebd4",
+      "name": "Утвердить задание в Битрикс. Авдеев",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -940,
+        -1040
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://desk.ppkmh.ru/rest/4/9ff4n7fnh0fy9ikv/bizproc.task.complete/",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "TASK_ID",
+              "value": "={{ $json.TaskID }}"
+            },
+            {
+              "name": "STATUS",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0d4e7adc-adf7-4651-8809-a26119f60497",
+      "name": "Утвердить задание в Битрикс24. Филатов",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -940,
+        -540
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Используется токен Авдеева",
+        "height": 447.22379999999987,
+        "width": 220.0934000000001
+      },
+      "id": "6226b27f-7726-46b5-befa-7183c8f7a1ab",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1000.0933999999997,
+        -1118.297900000001
+      ]
+    },
+    {
+      "parameters": {
+        "value1": "={{ $json.callback_query.message.chat.id }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "equal",
+              "value2": 399224802
+            },
+            {
+              "operation": "equal",
+              "value2": 446260098,
+              "output": 1
+            }
+          ]
+        },
+        "fallbackOutput": 3
+      },
+      "id": "2b7c4386-e923-4e31-ac02-aa2df769175e",
+      "name": "Switch3",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -1160,
+        -540
+      ]
+    },
+    {
+      "parameters": {
+        "value1": "={{ $json.callback_query.message.chat.id }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "equal",
+              "value2": 399224802
+            },
+            {
+              "operation": "equal",
+              "value2": 446260098,
+              "output": 1
+            }
+          ]
+        },
+        "fallbackOutput": 3
+      },
+      "id": "c211f3e3-0a8f-4adb-9da1-2dba2f24ad64",
+      "name": "Switch4",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -1160,
+        -360
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "timezone": "Europe/Moscow",
+    "saveExecutionProgress": "DEFAULT",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-03-10T17:32:23.736Z",
+      "updatedAt": "2023-03-10T17:32:23.736Z",
+      "id": "1",
+      "name": "Bitrix"
+    },
+    {
+      "createdAt": "2023-03-10T17:32:39.205Z",
+      "updatedAt": "2023-03-10T17:32:39.205Z",
+      "id": "3",
+      "name": "Telegramm"
+    },
+    {
+      "createdAt": "2023-03-17T16:21:45.765Z",
+      "updatedAt": "2023-03-17T16:21:45.765Z",
+      "id": "5",
+      "name": "MySQL"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-03-29T17:41:50.000Z",
+  "versionId": "3115ab56-ade9-4a5f-a174-0ce247fe56eb"
+}
