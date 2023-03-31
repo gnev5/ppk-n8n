@@ -1,0 +1,95 @@
+{
+  "active": false,
+  "connections": {
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2023-02-17T11:37:15.732Z",
+  "id": "5",
+  "name": "IMAP AVDEEV",
+  "nodes": [
+    {
+      "parameters": {
+        "format": "resolved",
+        "options": {}
+      },
+      "id": "28c0875a-2936-42ac-8ce1-b5306e87198f",
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2,
+      "position": [
+        600,
+        380
+      ],
+      "credentials": {
+        "imap": {
+          "id": "5",
+          "name": "IMAP account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "dataPropertyName": "html",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "bd",
+              "cssSelector": "body"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0a3593da-2138-474b-8405-2fefc2cc1010",
+      "name": "HTML",
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1,
+      "position": [
+        880,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "dataPropertyName": "={{ $json[\"textHtml\"][\"type\"] }}",
+        "options": {}
+      },
+      "id": "71d0cb39-1ccb-4c58-8c6b-50d60718bd9c",
+      "name": "XML",
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        860,
+        580
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-02-17T16:27:14.000Z",
+  "versionId": "106dc214-9a55-4195-80d1-38edddbbe7fa"
+}
