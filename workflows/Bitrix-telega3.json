@@ -1,0 +1,1018 @@
+{
+  "active": true,
+  "connections": {
+    "MySQL1": {
+      "main": [
+        [
+          {
+            "node": "IF1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF1": {
+      "main": [
+        [
+          {
+            "node": "Switch4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch3": {
+      "main": [
+        [],
+        [],
+        [
+          {
+            "node": "Bitrix",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Сообщить название задачи": {
+      "main": [
+        [
+          {
+            "node": "Delete session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Параметры вебхука": {
+      "main": [
+        [
+          {
+            "node": "Установить вебхук для телеграмм бота",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch4": {
+      "main": [
+        [
+          {
+            "node": "нет сессии, нет команды",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "меню",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set4insert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Запрос номера задачи3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tgTrigger": {
+      "main": [
+        [
+          {
+            "node": "MySQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "insert session": {
+      "main": [
+        [
+          {
+            "node": "Запрос номера задачи",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set4insert": {
+      "main": [
+        [
+          {
+            "node": "insert session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bitrix": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Запрос номера задачи1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Сообщить название задачи",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Запрос номера задачи1": {
+      "main": [
+        [
+          {
+            "node": "Delete session1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Запрос номера задачи3": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "удалить меню",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "удалить меню": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "удалить меню1": {
+      "main": [
+        [
+          {
+            "node": "удалить сообщение",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Показать меню": {
+      "main": [
+        [
+          {
+            "node": "удалить сообщение",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "удалить сообщение1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-15T17:25:33.895Z",
+  "id": "19",
+  "name": "Bitrix-telega3",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=select chat_id,user_id,process,step from ppk.ppkmh_tg_session where chat_id = {{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }} and user_id = {{ $json[\"message\"][\"from\"][\"id\"] }}"
+      },
+      "id": "25cdb0e7-95e0-417a-a502-7ded4550083b",
+      "name": "MySQL1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        -400
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "mySql": {
+          "id": "11",
+          "name": "ppk"
+        }
+      },
+      "notes": "проверяем активную сессию"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json[\"process\"] }}",
+              "operation": "isEmpty"
+            }
+          ],
+          "string": [
+            {}
+          ]
+        }
+      },
+      "id": "e9adb2ea-5211-4784-9f58-bd4e57a08eef",
+      "name": "IF1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -1480,
+        -400
+      ]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $node[\"MySQL1\"].json[\"process\"] }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "contains",
+              "value2": "/menu",
+              "output": 1
+            },
+            {
+              "operation": "contains",
+              "value2": "/taskinfo",
+              "output": 2
+            },
+            {
+              "operation": "contains",
+              "value2": "/morning",
+              "output": 3
+            }
+          ]
+        },
+        "fallbackOutput": 0
+      },
+      "id": "77ce987d-d579-4dcd-b4c6-498404acb29e",
+      "name": "Switch3",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -1260,
+        -380
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "={{ $json[\"result\"][\"ID\"] }} -  {{ $json[\"result\"][\"TITLE\"] }}\nОтветственный: {{ $node[\"Bitrix\"].json[\"result\"][\"RESPONSIBLE_LAST_NAME\"] }}{{ $node[\"Bitrix\"].json[\"result\"][\"RESPONSIBLE_NAME\"] }}{{ $node[\"Bitrix\"].json[\"result\"][\"RESPONSIBLE_SECOND_NAME\"] }}\nСрок: {{ $node[\"Bitrix\"].json[\"result\"][\"DEADLINE\"] }}",
+        "additionalFields": {}
+      },
+      "id": "00d67669-c38e-4d1b-a632-b3e96aba0844",
+      "name": "Сообщить название задачи",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -320
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "TelegrammToken",
+              "value": "6183757927:AAEajqG_Irh7LePpUr3_TZkGtdcG_NbY5zw"
+            },
+            {
+              "name": "WebHookUrl",
+              "value": "https://n8n.ppkmh.ru/webhook-test/30cbbf62-8eca-43df-a747-2cdb39920fa8/webhook"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e165ef78-9fb3-4551-8104-e78baeb008dc",
+      "name": "Параметры вебхука",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -1760,
+        -600
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.telegram.org/bot{{ $json[\"TelegrammToken\"] }}/setwebhook?url={{ $json[\"WebHookUrl\"] }}",
+        "options": {}
+      },
+      "id": "0bfbc46a-0864-48ee-b383-ce5aa99f9cce",
+      "name": "Установить вебхук для телеграмм бота",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -1500,
+        -600
+      ]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $node[\"tgTrigger\"].json[\"message\"][\"text\"] }}",
+        "rules": {
+          "rules": [
+            {
+              "operation": "contains",
+              "value2": "/menu",
+              "output": 1
+            },
+            {
+              "operation": "contains",
+              "value2": "/taskinfo",
+              "output": 2
+            },
+            {
+              "operation": "contains",
+              "value2": "/morning",
+              "output": 3
+            }
+          ]
+        },
+        "fallbackOutput": 0
+      },
+      "id": "9a8e6760-d688-4a7f-a9ec-a08fcbcd27cb",
+      "name": "Switch4",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        -1260,
+        -560
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "=",
+        "text": "Я ничего пока не умею, но по чуть чуть научусь.",
+        "additionalFields": {}
+      },
+      "id": "9ca1c8e1-2578-45e3-bec9-29c171e30bea",
+      "name": "Запрос номера задачи2",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -1280,
+        -880
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "*"
+        ],
+        "additionalFields": {}
+      },
+      "id": "fbccf8b2-3ef3-47fe-915e-5958ce3dca0e",
+      "name": "tgTrigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1800,
+        -400
+      ],
+      "webhookId": "30cbbf62-8eca-43df-a747-2cdb39920fa8",
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "2d4795d1-af6e-4289-9d51-467bc0b6544c",
+      "name": "нет сессии, нет команды",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -1020,
+        -1020
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "Введите номер задачи:",
+        "additionalFields": {}
+      },
+      "id": "d311ebd2-4af6-4eca-aae0-8a13703811b2",
+      "name": "Запрос номера задачи",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -580,
+        -820
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "Я ничего пока не умею, но по чуть чуть научусь.",
+        "additionalFields": {}
+      },
+      "id": "fc533e9b-72e0-4978-af64-caa6abf44470",
+      "name": "меню",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        -1020
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "table": {
+          "__rl": true,
+          "value": "ppk.ppkmh_tg_session",
+          "mode": "name"
+        },
+        "columns": "=chat_id,user_id,process,step",
+        "options": {}
+      },
+      "id": "fdf31656-3141-4765-bf5b-1db77c488c28",
+      "name": "insert session",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -740,
+        -820
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "11",
+          "name": "ppk"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "number": [
+            {
+              "name": "chat_id",
+              "value": "={{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}"
+            },
+            {
+              "name": "user_id",
+              "value": "={{ $node[\"tgTrigger\"].json[\"message\"][\"from\"][\"id\"] }}"
+            },
+            {
+              "name": "step"
+            }
+          ],
+          "string": [
+            {
+              "name": "process",
+              "value": "={{ $node[\"tgTrigger\"].json[\"message\"][\"text\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1ed473ee-e111-404d-bce2-28b1a7ba898e",
+      "name": "Set4insert",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -860,
+        -820
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://test-desk.ppkmh.ru/rest/3/k0jvyoyykyzpghxh/task.item.getdata.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "TASKID",
+              "value": "={{ $node[\"tgTrigger\"].json[\"message\"][\"text\"] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c38ea87c-324f-4508-855d-93639d3726db",
+      "name": "Bitrix",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -880,
+        -360
+      ],
+      "alwaysOutputData": true,
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=delete FROM ppkmh_tg_session where chat_id = {{ $node[\"MySQL1\"].json[\"chat_id\"] }} AND user_id = {{ $node[\"MySQL1\"].json[\"user_id\"] }}"
+      },
+      "id": "f0403c12-e7cf-4e29-a27f-d5e6fc470e52",
+      "name": "Delete session",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        -320
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "11",
+          "name": "ppk"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.result.ID }}",
+              "operation": "isEmpty"
+            }
+          ]
+        }
+      },
+      "id": "bf9e09c1-0080-4c31-b866-80a7219210ec",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -660,
+        -360
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "Извините, задачи с таким номером нету.",
+        "additionalFields": {}
+      },
+      "id": "5d863c71-53c0-4a4e-91ae-60b50f10c2a7",
+      "name": "Запрос номера задачи1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        -500
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=delete FROM ppkmh_tg_session where chat_id = {{ $node[\"MySQL1\"].json[\"chat_id\"] }} AND user_id = {{ $node[\"MySQL1\"].json[\"user_id\"] }}"
+      },
+      "id": "2fd773a4-d06e-4b88-aac1-263b985f20a2",
+      "name": "Delete session1",
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        -500
+      ],
+      "credentials": {
+        "mySql": {
+          "id": "11",
+          "name": "ppk"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "Доброе утро!",
+        "replyMarkup": "replyKeyboard",
+        "replyKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Офис",
+                    "additionalFields": {}
+                  },
+                  {
+                    "text": "Офис, потом встреча",
+                    "additionalFields": {}
+                  },
+                  {
+                    "text": "Офис, потом площадка",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Удаленно",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Площадка",
+                    "additionalFields": {}
+                  },
+                  {
+                    "text": "Площадка, потом офис",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Отпуск",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Внешняя встреча",
+                    "additionalFields": {}
+                  },
+                  {
+                    "text": "Внешняя встреча потом офис",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "replyKeyboardOptions": {},
+        "additionalFields": {}
+      },
+      "id": "c2e5e3c5-a20d-4501-a3a7-b39b0bf599c2",
+      "name": "Запрос номера задачи3",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -920,
+        -660
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteMessage",
+        "chatId": "-1001902731562",
+        "messageId": "={{ $json.result.message_id }}"
+      },
+      "id": "10d25196-1cbb-4b36-99be-4e49c3c34bd5",
+      "name": "удалить сообщение",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -1620,
+        -860
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "text": "перекличка завершена",
+        "replyMarkup": "replyKeyboardRemove",
+        "replyKeyboardRemove": {
+          "remove_keyboard": true
+        },
+        "additionalFields": {}
+      },
+      "id": "91e2d85d-89ba-49bb-b7dd-e3560eb82450",
+      "name": "удалить меню",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        -660
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "unit": "minutes"
+      },
+      "id": "a6025adb-9bd8-4d3f-b6fa-053a958b821c",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        -660
+      ],
+      "webhookId": "4438e9ac-82dd-4aa2-b3ec-2246aa54aba3"
+    },
+    {
+      "parameters": {
+        "operation": "deleteMessage",
+        "chatId": "{{ $node[\"tgTrigger\"].json[\"message\"][\"chat\"][\"id\"] }}",
+        "messageId": "={{ $json.result.message_id }}"
+      },
+      "id": "0245b95e-ff8f-4726-8d17-aeede89da506",
+      "name": "удалить сообщение1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        -660
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "=-1001902731562",
+        "text": "перекличка завершена",
+        "replyMarkup": "replyKeyboardRemove",
+        "replyKeyboardRemove": {},
+        "additionalFields": {}
+      },
+      "id": "b14efdd8-da40-4b81-bbd9-d7a8639343e1",
+      "name": "удалить меню1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -1840,
+        -1020
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "=-1001902731562",
+        "text": "Доброе утро!",
+        "replyMarkup": "replyKeyboard",
+        "replyKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Офис",
+                    "additionalFields": {}
+                  },
+                  {
+                    "text": "Офис, потом встреча",
+                    "additionalFields": {}
+                  },
+                  {
+                    "text": "Офис, потом площадка",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Удаленно",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Площадка",
+                    "additionalFields": {}
+                  },
+                  {
+                    "text": "Площадка, потом офис",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Отпуск",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Внешняя встреча",
+                    "additionalFields": {}
+                  },
+                  {
+                    "text": "Внешняя встреча потом офис",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "replyKeyboardOptions": {},
+        "additionalFields": {}
+      },
+      "id": "1dccc076-788b-4ba7-b400-3092a3e6076a",
+      "name": "Показать меню",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -1840,
+        -860
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10,
+        "unit": "seconds"
+      },
+      "id": "3a2926c0-3aa9-436c-be72-27b651835b4f",
+      "name": "Wait1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        -660
+      ],
+      "webhookId": "b4415824-3726-4193-ae61-a2f64fdeb3bd"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "timezone": "Europe/Moscow",
+    "saveExecutionProgress": "DEFAULT",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-03-10T17:32:23.736Z",
+      "updatedAt": "2023-03-10T17:32:23.736Z",
+      "id": "1",
+      "name": "Bitrix"
+    },
+    {
+      "createdAt": "2023-03-10T17:32:39.205Z",
+      "updatedAt": "2023-03-10T17:32:39.205Z",
+      "id": "3",
+      "name": "Telegramm"
+    },
+    {
+      "createdAt": "2023-03-17T16:21:45.765Z",
+      "updatedAt": "2023-03-17T16:21:45.765Z",
+      "id": "5",
+      "name": "MySQL"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-03-22T09:29:50.000Z",
+  "versionId": "67ff5e84-5d8e-4800-91b9-0bd4f6fab5b3"
+}
