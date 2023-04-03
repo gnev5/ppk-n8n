@@ -1,0 +1,160 @@
+{
+  "active": true,
+  "connections": {
+    "user.search/": {
+      "main": [
+        [
+          {
+            "node": "GET user.search",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "NocoDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET user.search": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-22T18:03:54.294Z",
+  "id": "21",
+  "name": "Bitrix24 user.search",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "708ef487-6168-499c-b376-fef284959e69",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        140,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "create",
+        "projectId": "p_zwqpx9zk3xwojv",
+        "table": "md_ufemdb6hxmhm21",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldName": "request_body",
+              "fieldValue": "={{ $json.body }}"
+            },
+            {
+              "fieldName": "request_params",
+              "fieldValue": "={{ $json.params }}"
+            },
+            {
+              "fieldName": "request_query",
+              "fieldValue": "={{ $json.query }}"
+            }
+          ]
+        }
+      },
+      "id": "a920f1d7-0b00-462b-928e-9cd81b79ff2a",
+      "name": "NocoDB",
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        20
+      ],
+      "credentials": {
+        "nocoDbApiToken": {
+          "id": "25",
+          "name": "NocoDB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "815d1b26-65d1-4cfb-b417-435ccb448a72/user.search",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "6fa983b7-39e9-460d-ba6f-4023b0eddfd6",
+      "name": "user.search/",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        180
+      ],
+      "webhookId": "815d1b26-65d1-4cfb-b417-435ccb448a72"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/user.search/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"FILTER\": {\"EMAIL\": \"{{ $json.body.FILTER.EMAIL }}\"}} ",
+        "options": {}
+      },
+      "id": "fc061130-8457-44e3-8557-f697b4cb1fc8",
+      "name": "GET user.search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -60,
+        180
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "timezone": "Europe/Moscow",
+    "saveExecutionProgress": "DEFAULT",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-03-10T17:32:23.736Z",
+      "updatedAt": "2023-03-10T17:32:23.736Z",
+      "id": "1",
+      "name": "Bitrix"
+    },
+    {
+      "createdAt": "2023-03-10T17:32:39.205Z",
+      "updatedAt": "2023-03-10T17:32:39.205Z",
+      "id": "3",
+      "name": "Telegramm"
+    },
+    {
+      "createdAt": "2023-03-21T12:50:32.972Z",
+      "updatedAt": "2023-03-21T12:50:32.972Z",
+      "id": "7",
+      "name": "RSS"
+    },
+    {
+      "createdAt": "2023-03-21T12:50:49.050Z",
+      "updatedAt": "2023-03-21T12:50:49.050Z",
+      "id": "9",
+      "name": "SendMail"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-04-03T16:49:42.000Z",
+  "versionId": "ec597ffe-e3c9-46cb-8ee4-c9d9aab580f3"
+}
