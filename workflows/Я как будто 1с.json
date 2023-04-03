@@ -11,6 +11,11 @@
           }
         ]
       ]
+    },
+    "HTTP Request2": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2023-04-03T14:03:40.111Z",
@@ -49,10 +54,10 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/task.item.add/",
+        "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/task.item.addfile/",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\"TASKDATA\": {\"TITLE\": \"задачка из n8n\", \"RESPONSIBLE_ID\": 3}}",
+        "jsonBody": "={\"TITLE\": \"задачка из n8n\", \"RESPONSIBLE_ID\": 3}",
         "options": {}
       },
       "id": "c3eb094e-834e-4c50-90ab-29d89fb7513e",
@@ -67,7 +72,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://n8n.ppkmh.ru/webhook-test/815d1b26-65d1-4cfb-b417-435ccb448a72/task.item.add/",
+        "url": "https://n8n.ppkmh.ru/webhook/815d1b26-65d1-4cfb-b417-435ccb448a72/task.item.add",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "{\"TASKDATA\": {\"TITLE\": \"задачка из n8n\", \"RESPONSIBLE_ID\": 3}}",
@@ -88,6 +93,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-03T16:55:05.000Z",
-  "versionId": "276d16b3-83bc-49d2-bd04-caa0a3f64168"
+  "updatedAt": "2023-04-03T17:40:47.000Z",
+  "versionId": "90235bcc-0f62-4922-81cf-14310b48fdf8"
 }
