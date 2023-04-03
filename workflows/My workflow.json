@@ -31,16 +31,19 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://n8n.ppkmh.ru/webhook-test/815d1b26-65d1-4cfb-b417-435ccb448a72",
+        "url": "https://n8n.ppkmh.ru/webhook/815d1b26-65d1-4cfb-b417-435ccb448a72/gette",
         "sendQuery": true,
         "queryParameters": {
           "parameters": [
             {
-              "name": "rwerttg",
-              "value": "dsfdgcb fgh"
+              "name": "ПараметрАдын",
+              "value": "значение параметра адын"
             }
           ]
         },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"FILTER\": {\"EMAIL\": \"afilatov@ppkmh.ru\"}}",
         "options": {}
       },
       "id": "22e4c5b6-282a-45ea-8b9e-28cd9a4b8a8a",
@@ -58,6 +61,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-03T14:03:40.111Z",
-  "versionId": "c3ad3917-122f-471d-8fd4-5c98817bc7a9"
+  "updatedAt": "2023-04-03T15:55:33.000Z",
+  "versionId": "cb17638c-2430-467b-aa24-8cbf6b72434d"
 }
