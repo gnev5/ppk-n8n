@@ -1,0 +1,535 @@
+{
+  "active": false,
+  "connections": {
+    "GET task.item.getdata1": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists": {
+      "main": [
+        [
+          {
+            "node": "Telegram2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Telegram5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Item Lists1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-03-22T18:03:54.294Z",
+  "id": "21",
+  "name": "BitrixUserSearch",
+  "nodes": [
+    {
+      "parameters": {
+        "chatId": "399224802",
+        "text": "={{ $json[\"result\"][\"ID\"] }} {{ $json[\"result\"][\"TITLE\"] }}",
+        "additionalFields": {}
+      },
+      "id": "bdf0fbce-9b73-4cf8-bf22-1eee5a71a427",
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        320,
+        260
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "*"
+        ],
+        "additionalFields": {}
+      },
+      "id": "8bc37c5c-0e2b-46b0-b900-0e4fdf9fe0b0",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        60,
+        660
+      ],
+      "webhookId": "d68a0ed8-cf95-4c8b-a472-2f68e4364ef3",
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://test-desk.ppkmh.ru/rest/3/k0jvyoyykyzpghxh/task.item.getdata.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "TASKID",
+              "value": "1367"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2f953484-8e28-4677-89eb-c2051c5dfe1d",
+      "name": "GET task.item.getdata",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -580,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://test-desk.ppkmh.ru/rest/3/k0jvyoyykyzpghxh/tasks.task.get",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "1434"
+            },
+            {
+              "name": "SELECT",
+              "value": "['ID','TITLE']"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7cd1bfc1-c03a-412d-94ae-5877784ae009",
+      "name": "GET tasks.task.get",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -360,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://test-desk.ppkmh.ru/rest/3/k0jvyoyykyzpghxh/tasks.task.get",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "[ \t{ \t\t\"TASK\": {\"ID\": \"1434\"}, \t\t\"SELECT\": \"['ID', 'TITLE']\" \t} ]",
+        "options": {}
+      },
+      "id": "90083123-4350-4a89-b945-d73155229988",
+      "name": "GET tasks.task.get1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -360,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://test-desk.ppkmh.ru/rest/3/k0jvyoyykyzpghxh/task.item.getdata.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "TASKID",
+              "value": "1367"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2b9d3491-fff0-4d03-95f4-6a56c0b7c4d4",
+      "name": "GET task.item.getdata1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        20,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://test-desk.ppkmh.ru/rest/3/k0jvyoyykyzpghxh/task.item.getdata.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "TASKID",
+              "value": "1367"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6c9fc896-541c-41f5-975a-9288f87a45d7",
+      "name": "GET task.item.getdata2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        60,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://test-desk.ppkmh.ru/rest/3/k0jvyoyykyzpghxh/task.item.getdata.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "TASKID",
+              "value": "1367"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "99769674-f231-4e16-aa9b-722989df614d",
+      "name": "GET task.item.getdata3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -800,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://n8n.ppkmh.local:5678/rest/workflows",
+        "options": {}
+      },
+      "id": "cd143220-e746-45a6-8957-bd4a078f7044",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        320,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "updates": [
+          "*"
+        ],
+        "additionalFields": {}
+      },
+      "id": "270a31ab-8253-4d44-8ffb-3d4757eaca0c",
+      "name": "Telegram Trigger1",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        900
+      ],
+      "webhookId": "31fd4e7f-74cc-4cd7-aacc-a7b2e42fd7f5",
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-842713612",
+        "text": "Выберите сообщение...",
+        "replyMarkup": "replyKeyboard",
+        "replyKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Доброе утро! Офис.",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Доброе утро! Удаленно.",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "replyKeyboardOptions": {},
+        "additionalFields": {}
+      },
+      "id": "5b3088b8-21fa-494d-a8e7-37872acb5bde",
+      "name": "Telegram1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        220
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-1001902731562",
+        "text": "={{ $json.guid }} {{ $json.content }} {{ $json.enclosure.url }}",
+        "additionalFields": {}
+      },
+      "id": "b2cee746-1316-44d5-ad10-5024cd19ba8a",
+      "name": "Telegram2",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        -660
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "-842713612",
+        "text": "Выберите сообщение...",
+        "additionalFields": {}
+      },
+      "id": "12481e0a-cbb4-4280-b34c-0f8da5c6aaf8",
+      "name": "Telegram3",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -700,
+        220
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "-842713612",
+        "text": "Выберите сообщение...",
+        "additionalFields": {}
+      },
+      "id": "4ba7a657-e24f-4fe3-b372-535741def5b6",
+      "name": "Telegram4",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        420
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://lenta.ru/rss"
+      },
+      "id": "938a6e52-c1db-4ca9-9843-54ca2f2db564",
+      "name": "RSS Read",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [
+        -760,
+        -600
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "limit",
+        "maxItems": 5
+      },
+      "id": "19b37942-1f18-4ddb-ab8d-c41a756d3200",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        -540,
+        -600
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "-1001902731562",
+        "file": "={{ $json.enclosure.url }}",
+        "additionalFields": {
+          "caption": "={{ $json.content }} {{ $json.link }}"
+        }
+      },
+      "id": "d999d4fa-44b2-4429-8128-889c919a6295",
+      "name": "Telegram5",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        -260
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "9",
+          "name": "ppkmh_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "notreplay@ppkmh.ru",
+        "toEmail": "aavdeev@ppkmh.ru",
+        "subject": "News",
+        "text": "={{ $json.title }}\n{{ $json[\"content\"] }}\n{{ $json[\"link\"] }}\n",
+        "options": {}
+      },
+      "id": "3b62728c-3dd9-492a-8c10-ef9f050fbb47",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        140,
+        -540
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "15",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "aggregateItems",
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "id": "0413dc1b-6257-4a27-85f9-00df9089b22e",
+      "name": "Item Lists1",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        -160,
+        -420
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/user.search/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"FILTER\": {\"EMAIL\": \"afilatov@ppkmh.ru\"}}",
+        "options": {}
+      },
+      "id": "fc061130-8457-44e3-8557-f697b4cb1fc8",
+      "name": "GET task.item.getdata4",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -1340,
+        -420
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "timezone": "Europe/Moscow",
+    "saveExecutionProgress": "DEFAULT",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-03-10T17:32:23.736Z",
+      "updatedAt": "2023-03-10T17:32:23.736Z",
+      "id": "1",
+      "name": "Bitrix"
+    },
+    {
+      "createdAt": "2023-03-10T17:32:39.205Z",
+      "updatedAt": "2023-03-10T17:32:39.205Z",
+      "id": "3",
+      "name": "Telegramm"
+    },
+    {
+      "createdAt": "2023-03-21T12:50:32.972Z",
+      "updatedAt": "2023-03-21T12:50:32.972Z",
+      "id": "7",
+      "name": "RSS"
+    },
+    {
+      "createdAt": "2023-03-21T12:50:49.050Z",
+      "updatedAt": "2023-03-21T12:50:49.050Z",
+      "id": "9",
+      "name": "SendMail"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-04-03T12:55:05.000Z",
+  "versionId": "77b3afa0-6d65-401e-903c-0a27f95b9cf5"
+}
