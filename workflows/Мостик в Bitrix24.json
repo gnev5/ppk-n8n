@@ -39,7 +39,7 @@
         "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/user.search/",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\"FILTER\": {\"EMAIL\": \"afilatov@ppkmh.ru\"}}",
+        "jsonBody": "={\"FILTER\": {\"EMAIL\": \"{{ $json.body.FILTER.EMAIL }}\"}} ",
         "options": {}
       },
       "id": "fc061130-8457-44e3-8557-f697b4cb1fc8",
@@ -82,20 +82,7 @@
       ]
     },
     {
-      "parameters": {
-        "authentication": "nocoDbApiToken",
-        "operation": "create",
-        "projectId": "p_zwqpx9zk3xwojv",
-        "table": "PpkmhRequestsLog",
-        "fieldsUi": {
-          "fieldValues": [
-            {
-              "fieldName": "request",
-              "fieldValue": "123"
-            }
-          ]
-        }
-      },
+      "parameters": {},
       "id": "a920f1d7-0b00-462b-928e-9cd81b79ff2a",
       "name": "NocoDB",
       "type": "n8n-nodes-base.nocoDb",
@@ -105,9 +92,9 @@
         0
       ],
       "credentials": {
-        "nocoDbApiToken": {
-          "id": "25",
-          "name": "NocoDB Token account"
+        "nocoDb": {
+          "id": "27",
+          "name": "NocoDB account"
         }
       }
     }
@@ -147,6 +134,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-03T13:56:06.000Z",
-  "versionId": "0c6ddeb6-413c-4897-9631-d921fe9dbb88"
+  "updatedAt": "2023-04-03T14:53:17.000Z",
+  "versionId": "921ea9c6-a207-4719-8280-34e1e57fa207"
 }
