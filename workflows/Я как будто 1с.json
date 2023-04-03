@@ -1,0 +1,93 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-04-03T14:03:40.111Z",
+  "id": "33",
+  "name": "Я как будто 1с",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "f1b9225a-06fd-49ca-a50c-5804d5d77ed8",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        820,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.ppkmh.ru/webhook/815d1b26-65d1-4cfb-b417-435ccb448a72/user.search",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"FILTER\": {\"EMAIL\": \"afilatov@ppkmh.ru\"}}",
+        "options": {}
+      },
+      "id": "22e4c5b6-282a-45ea-8b9e-28cd9a4b8a8a",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1020,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/task.item.add/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"TASKDATA\": {\"TITLE\": \"задачка из n8n\", \"RESPONSIBLE_ID\": 3}}",
+        "options": {}
+      },
+      "id": "c3eb094e-834e-4c50-90ab-29d89fb7513e",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1020,
+        660
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.ppkmh.ru/webhook-test/815d1b26-65d1-4cfb-b417-435ccb448a72/task.item.add/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"TASKDATA\": {\"TITLE\": \"задачка из n8n\", \"RESPONSIBLE_ID\": 3}}",
+        "options": {}
+      },
+      "id": "f23a0c17-0009-41e8-ba6c-032847e8b2e0",
+      "name": "HTTP Request2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1020,
+        280
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-04-03T16:55:05.000Z",
+  "versionId": "276d16b3-83bc-49d2-bd04-caa0a3f64168"
+}
