@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Webhook": {
       "main": [
@@ -22,6 +22,33 @@
         [
           {
             "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "GET task.item.getdata",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "NocoDB1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET task.item.getdata": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
             "type": "main",
             "index": 0
           }
@@ -54,7 +81,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "815d1b26-65d1-4cfb-b417-435ccb448a72",
+        "path": "815d1b26-65d1-4cfb-b417-435ccb448a72/get_user",
         "responseMode": "responseNode",
         "options": {}
       },
@@ -82,19 +109,126 @@
       ]
     },
     {
-      "parameters": {},
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "create",
+        "projectId": "p_zwqpx9zk3xwojv",
+        "table": "md_ufemdb6hxmhm21",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldName": "request_body",
+              "fieldValue": "={{ $json.body }}"
+            },
+            {
+              "fieldName": "request_params",
+              "fieldValue": "={{ $json.params }}"
+            },
+            {
+              "fieldName": "request_query",
+              "fieldValue": "={{ $json.query }}"
+            }
+          ]
+        }
+      },
       "id": "a920f1d7-0b00-462b-928e-9cd81b79ff2a",
       "name": "NocoDB",
       "type": "n8n-nodes-base.nocoDb",
       "typeVersion": 2,
       "position": [
         -60,
-        0
+        20
       ],
       "credentials": {
-        "nocoDb": {
-          "id": "27",
-          "name": "NocoDB account"
+        "nocoDbApiToken": {
+          "id": "25",
+          "name": "NocoDB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "815d1b26-65d1-4cfb-b417-435ccb448a72/gette",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "69b5700e-2b2a-4ec1-9a52-27d2624b231c",
+      "name": "Webhook1",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        -160
+      ],
+      "webhookId": "04d0b3eb-6908-4791-9bad-a80dbf796dd5"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/user.search/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"FILTER\": {\"EMAIL\": \"{{ $json.body.FILTER.EMAIL }}\"}} ",
+        "options": {}
+      },
+      "id": "7b37267a-0016-414c-a7d9-10bb5941a9ba",
+      "name": "GET task.item.getdata",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -100,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "3ff4eb4a-6e4a-44fb-acaa-95709c24599a",
+      "name": "Respond to Webhook1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        80,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "create",
+        "projectId": "p_zwqpx9zk3xwojv",
+        "table": "md_ufemdb6hxmhm21",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldName": "request_body",
+              "fieldValue": "={{ $json.body }}"
+            },
+            {
+              "fieldName": "request_params",
+              "fieldValue": "={{ $json.params }}"
+            },
+            {
+              "fieldName": "request_query",
+              "fieldValue": "={{ $json.query }}"
+            }
+          ]
+        }
+      },
+      "id": "770aea28-b5aa-495a-aa2f-12690d4c7dc7",
+      "name": "NocoDB1",
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 2,
+      "position": [
+        -100,
+        -320
+      ],
+      "credentials": {
+        "nocoDbApiToken": {
+          "id": "25",
+          "name": "NocoDB"
         }
       }
     }
@@ -133,7 +267,7 @@
       "name": "SendMail"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2023-04-03T14:53:17.000Z",
-  "versionId": "921ea9c6-a207-4719-8280-34e1e57fa207"
+  "triggerCount": 2,
+  "updatedAt": "2023-04-03T15:56:02.000Z",
+  "versionId": "adbbc7fb-8a6a-4001-82ff-eb0e20ab1ce5"
 }
