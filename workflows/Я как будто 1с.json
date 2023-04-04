@@ -10,21 +10,11 @@
             "index": 0
           },
           {
-            "node": "HTTP Request4",
+            "node": "HTTP Request6",
             "type": "main",
             "index": 0
           }
         ]
-      ]
-    },
-    "HTTP Request3": {
-      "main": [
-        []
-      ]
-    },
-    "Move Binary Data": {
-      "main": [
-        []
       ]
     },
     "HTTP Request4": {
@@ -47,6 +37,17 @@
           }
         ]
       ]
+    },
+    "HTTP Request6": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-04-03T14:03:40.111Z",
@@ -60,8 +61,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        660,
-        460
+        420,
+        420
       ]
     },
     {
@@ -194,6 +195,59 @@
         1120,
         680
       ]
+    },
+    {
+      "parameters": {
+        "url": "https://search-maps.yandex.ru/v1/",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "Новосибирск+Кофе+с+собой"
+            },
+            {
+              "name": "=lang",
+              "value": "ru_RU"
+            },
+            {
+              "name": "type",
+              "value": "biz"
+            },
+            {
+              "name": "results",
+              "value": "1000000"
+            },
+            {
+              "name": "apikey",
+              "value": "c9f70d98-e813-4cf2-a147-223ff1ab3ff9"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "88edfc8e-5b51-4871-870e-9bc5e618b665",
+      "name": "HTTP Request6",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        520,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "features",
+        "options": {}
+      },
+      "id": "f4685f24-9770-474f-8b90-2e65ed44aed2",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        740,
+        120
+      ]
     }
   ],
   "pinData": {
@@ -209,6 +263,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-04T11:47:07.000Z",
-  "versionId": "32478f1d-5781-461d-8435-52e9adbc1f47"
+  "updatedAt": "2023-04-04T18:35:02.000Z",
+  "versionId": "3106fec7-5993-4c6c-a03e-dd0cf2828685"
 }
