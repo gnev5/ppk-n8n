@@ -5,16 +5,33 @@
       "main": [
         [
           {
-            "node": "HTTP Request2",
+            "node": "HTTP Request3",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "HTTP Request2": {
+    "HTTP Request3": {
       "main": [
-        []
+        [
+          {
+            "node": "Move Binary Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Move Binary Data": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -29,7 +46,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        820,
+        660,
         460
       ]
     },
@@ -47,8 +64,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1020,
-        460
+        1140,
+        320
       ]
     },
     {
@@ -57,7 +74,6 @@
         "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/task.item.addfile/",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\"TITLE\": \"задачка из n8n\", \"RESPONSIBLE_ID\": 3}",
         "options": {}
       },
       "id": "c3eb094e-834e-4c50-90ab-29d89fb7513e",
@@ -65,8 +81,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1020,
-        660
+        1160,
+        480
       ]
     },
     {
@@ -83,8 +99,36 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1020,
-        280
+        1140,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "setAllData": false,
+        "options": {}
+      },
+      "id": "777ba172-6c47-41cd-82dc-32452f36a26e",
+      "name": "Move Binary Data",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        940,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://rfrit.ru/media/documents/%D0%9A%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81%D0%BD%D0%B0%D1%8F_%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F_%D0%BF%D0%BE_%D0%B2%D0%BD%D0%B5%D0%B4%D1%80%D0%B5%D0%BD%D0%B8%D1%8E_%D1%80%D0%BE%D1%81%D1%81%D0%B8%D0%B8%D1%81%D0%BA%D0%B8%D1%85_%D0%98%D0%A2-%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B8_%D0%B2_%D1%80%D0%B5%D0%B4._31.10.2022.pdf",
+        "options": {}
+      },
+      "id": "a6b24566-46f0-4081-a8e4-047fbd86ecfc",
+      "name": "HTTP Request3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        800,
+        460
       ]
     }
   ],
@@ -93,6 +137,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-03T17:40:47.000Z",
-  "versionId": "90235bcc-0f62-4922-81cf-14310b48fdf8"
+  "updatedAt": "2023-04-04T09:27:24.000Z",
+  "versionId": "678d7eac-9dec-4a0e-b3a7-54a0897090d9"
 }
