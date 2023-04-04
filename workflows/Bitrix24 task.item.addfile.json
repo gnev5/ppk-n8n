@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "task.item.addfile": {
       "main": [
@@ -68,7 +68,7 @@
             },
             {
               "fieldName": "Title",
-              "fieldValue": "task.item.add"
+              "fieldValue": "task.item.addfile"
             }
           ]
         }
@@ -147,6 +147,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-04-03T17:32:49.000Z",
-  "versionId": "08e4bd95-2c8d-4982-b0b3-3ff8e1af9850"
+  "updatedAt": "2023-04-04T11:51:34.000Z",
+  "versionId": "2c489c48-3f04-40ec-bbd6-6fc93e4e44fa"
 }
