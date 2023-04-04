@@ -1,0 +1,152 @@
+{
+  "active": true,
+  "connections": {
+    "task.item.complete": {
+      "main": [
+        [
+          {
+            "node": "GET task.item.complete",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "NocoDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET task.item.complete": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-04-04T11:47:51.925Z",
+  "id": "39",
+  "name": "Bitrix24 task.item.complete",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "0c006d68-03b8-45f8-9fd7-f4752b4fe7a0",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        140,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "create",
+        "projectId": "p_zwqpx9zk3xwojv",
+        "table": "md_ufemdb6hxmhm21",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldName": "request_body",
+              "fieldValue": "={{ $json.body }}"
+            },
+            {
+              "fieldName": "request_params",
+              "fieldValue": "={{ $json.params }}"
+            },
+            {
+              "fieldName": "request_query",
+              "fieldValue": "={{ $json.query }}"
+            },
+            {
+              "fieldName": "Title",
+              "fieldValue": "task.item.complete"
+            }
+          ]
+        }
+      },
+      "id": "0ab64f0c-880d-4bc0-9c12-655b25213425",
+      "name": "NocoDB",
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        20
+      ],
+      "credentials": {
+        "nocoDbApiToken": {
+          "id": "25",
+          "name": "NocoDB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "815d1b26-65d1-4cfb-b417-435ccb448a72/task.item.complete",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "80872aa1-56f7-4d39-ba12-fa107c57e226",
+      "name": "task.item.complete",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        180
+      ],
+      "webhookId": "717a8677-7e11-4ba7-b217-cee64f2e8ce3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://desk.ppkmh.ru/rest/3/47d71ws5pthd74ls/task.item.complete/",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.body) }}",
+        "options": {}
+      },
+      "id": "a15339a3-f01f-4359-b5e5-b32f2bb4efb8",
+      "name": "GET task.item.complete",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -60,
+        180
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "timezone": "Europe/Moscow",
+    "saveExecutionProgress": "DEFAULT",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-03-10T17:32:23.736Z",
+      "updatedAt": "2023-03-10T17:32:23.736Z",
+      "id": "1",
+      "name": "Bitrix"
+    },
+    {
+      "createdAt": "2023-04-03T16:15:26.994Z",
+      "updatedAt": "2023-04-03T16:15:26.994Z",
+      "id": "21",
+      "name": "NocoDB"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2023-04-04T11:51:33.000Z",
+  "versionId": "75d1db21-417e-4597-99f7-6cbef4d9652c"
+}
