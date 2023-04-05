@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request1",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -88,8 +88,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1220,
-        460
+        1400,
+        220
       ]
     },
     {
@@ -146,8 +146,23 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 1,
       "position": [
-        1000,
-        240
+        1060,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://n8n.ppkmh.ru/webhook/815d1b26-65d1-4cfb-b417-435ccb448a72/getmeparams",
+        "options": {}
+      },
+      "id": "74cf9032-4c9d-4273-bfd3-bfb0c84b5b65",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1040,
+        460
       ]
     }
   ],
@@ -156,6 +171,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-05T14:58:49.000Z",
-  "versionId": "b0cafbff-2ced-43d5-a650-5ea8388185b1"
+  "updatedAt": "2023-04-05T15:50:39.000Z",
+  "versionId": "56c737b4-d9a5-424e-a3e5-3b7489fbca62"
 }
