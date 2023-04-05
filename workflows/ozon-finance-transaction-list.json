@@ -80,7 +80,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"filter\": {\n    \"date\": {\n      \"from\": \"2020-01-01T00:00:00.000Z\",\n      \"to\": \"2020-12-31T00:00:00.000Z\"\n    },\n    \"transaction_type\": \"all\"\n  },\n  \"page\": 1,\n  \"page_size\": 100\n}",
+        "jsonBody": "={\n  \"filter\": {\n    \"date\": {\n      \"from\": \"2022-04-01T00:00:00.000Z\",\n      \"to\": \"2022-05-01T00:00:00.000Z\"\n    },\n    \"transaction_type\": \"all\"\n  },\n  \"page\": 1,\n  \"page_size\": 100\n}",
         "options": {}
       },
       "id": "421d9ddc-8876-4a1c-aa8b-c0fea6723338",
@@ -88,7 +88,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1000,
+        1220,
         460
       ]
     },
@@ -102,7 +102,7 @@
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 2,
       "position": [
-        1220,
+        1440,
         460
       ]
     },
@@ -118,10 +118,9 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 1,
       "position": [
-        1440,
+        1660,
         460
-      ],
-      "disabled": true
+      ]
     },
     {
       "parameters": {
@@ -133,10 +132,23 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        1660,
+        1880,
         460
       ],
       "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "5a002f06-f492-40c6-8f4f-ed44eb6cd64a",
+      "name": "Split In Batches1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        240
+      ]
     }
   ],
   "pinData": {},
@@ -144,6 +156,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-05T13:22:59.000Z",
-  "versionId": "17fc8078-8df0-4893-9de0-67f245681f07"
+  "updatedAt": "2023-04-05T14:58:49.000Z",
+  "versionId": "b0cafbff-2ced-43d5-a650-5ea8388185b1"
 }
