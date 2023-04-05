@@ -205,7 +205,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"filter\": {\n    \"date\": {\n      \"from\": \"2022-03-01T00:00:00.001Z\",\n      \"to\": \"2022-04-01T00:00:00.000Z\"\n    },\n    \"transaction_type\": \"all\"\n  },\n  \"page\": 1,\n  \"page_size\": 10000\n}",
+        "jsonBody": "={\n  \"filter\": {\n    \"date\": {\n      \"from\": \"2023-02-01T00:00:00.000Z\",\n      \"to\": \"2023-03-01T00:00:00.000Z\"\n    },\n    \"transaction_type\": \"all\"\n  },\n  \"page\": 1,\n  \"page_size\": 10000\n}",
         "options": {}
       },
       "id": "561c678f-bf56-4ad5-bf13-76a8f7cbbe14",
@@ -223,6 +223,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-05T17:57:23.000Z",
-  "versionId": "78c2eec8-0231-4dcc-8244-3b406ba88816"
+  "updatedAt": "2023-04-05T18:10:15.000Z",
+  "versionId": "731dcdf2-15e2-4d2f-8f5f-ac882a647592"
 }
