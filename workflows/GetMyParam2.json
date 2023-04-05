@@ -1,0 +1,96 @@
+{
+  "active": true,
+  "connections": {
+    "user.search/": {
+      "main": [
+        [
+          {
+            "node": "Set",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-04-05T15:35:57.183Z",
+  "id": "49",
+  "name": "GetMyParam2",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "189b5156-4916-461d-962f-eff15d6f13a9",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        140,
+        180
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "815d1b26-65d1-4cfb-b417-435ccb448a72/getmeparams",
+        "responseCode": "={\"params\": [\n{\"from\":\"2022-03-01T00:00:00.000Z\", \"to\": \"2022-04-01T00:00:00.000Z\"},\n{\"from\":\"2022-04-01T00:00:00.000Z\", \"to\": \"2022-05-01T00:00:00.000Z\"},\n{\"from\":\"2022-05-01T00:00:00.000Z\", \"to\": \"2022-06-01T00:00:00.000Z\"},\n{\"from\":\"2022-06-01T00:00:00.000Z\", \"to\": \"2022-07-01T00:00:00.000Z\"},\n{\"from\":\"2022-07-01T00:00:00.000Z\", \"to\": \"2022-08-01T00:00:00.000Z\"},\n{\"from\":\"2022-08-01T00:00:00.000Z\", \"to\": \"2022-09-01T00:00:00.000Z\"},\n{\"from\":\"2022-09-01T00:00:00.000Z\", \"to\": \"2022-10-01T00:00:00.000Z\"},\n{\"from\":\"2022-10-01T00:00:00.000Z\", \"to\": \"2022-11-01T00:00:00.000Z\"}\n]\n}",
+        "options": {}
+      },
+      "id": "3572de21-22bf-4744-8697-ad9b3e3f45aa",
+      "name": "user.search/",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        180
+      ],
+      "webhookId": "fca84c63-804b-48f1-91a3-f93bfc052160"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "value": "=[\n{\"from\":\"2022-03-01T00:00:00.000Z\", \"to\": \"2022-04-01T00:00:00.000Z\"},\n{\"from\":\"2022-04-01T00:00:00.000Z\", \"to\": \"2022-05-01T00:00:00.000Z\"},\n{\"from\":\"2022-05-01T00:00:00.000Z\", \"to\": \"2022-06-01T00:00:00.000Z\"},\n{\"from\":\"2022-06-01T00:00:00.000Z\", \"to\": \"2022-07-01T00:00:00.000Z\"},\n{\"from\":\"2022-07-01T00:00:00.000Z\", \"to\": \"2022-08-01T00:00:00.000Z\"},\n{\"from\":\"2022-08-01T00:00:00.000Z\", \"to\": \"2022-09-01T00:00:00.000Z\"},\n{\"from\":\"2022-09-01T00:00:00.000Z\", \"to\": \"2022-10-01T00:00:00.000Z\"},\n{\"from\":\"2022-10-01T00:00:00.000Z\", \"to\": \"2022-11-01T00:00:00.000Z\"}\n]"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3098c1a3-2ca4-404e-95e2-2e23e0ab7d4e",
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        180
+      ],
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "timezone": "Europe/Moscow",
+    "saveExecutionProgress": "DEFAULT",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-04-05T15:53:09.000Z",
+  "versionId": "8b408217-cdef-4cb0-bfe4-02b214f9f158"
+}
