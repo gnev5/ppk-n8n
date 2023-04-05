@@ -79,14 +79,8 @@
           ]
         },
         "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "date",
-              "value": "2023-02"
-            }
-          ]
-        },
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"filter\": {\n    \"date\": {\n      \"from\": \"2020-01-01T00:00:00.000Z\",\n      \"to\": \"2020-12-31T00:00:00.000Z\"\n    },\n    \"transaction_type\": \"all\"\n  },\n  \"page\": 1,\n  \"page_size\": 100\n}",
         "options": {}
       },
       "id": "421d9ddc-8876-4a1c-aa8b-c0fea6723338",
@@ -100,7 +94,7 @@
     },
     {
       "parameters": {
-        "fieldToSplitOut": "result",
+        "fieldToSplitOut": "result.operations",
         "options": {}
       },
       "id": "23396b50-07aa-4a0c-a929-ae8ad0b109c1",
@@ -126,7 +120,8 @@
       "position": [
         1440,
         460
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -140,7 +135,8 @@
       "position": [
         1660,
         460
-      ]
+      ],
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -148,6 +144,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-05T12:52:17.000Z",
-  "versionId": "57fb1273-add3-40d8-b438-e24a2178adc4"
+  "updatedAt": "2023-04-05T13:22:59.000Z",
+  "versionId": "17fc8078-8df0-4893-9de0-67f245681f07"
 }
