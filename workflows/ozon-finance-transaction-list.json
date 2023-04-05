@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "Read Binary Files",
             "type": "main",
             "index": 0
           }
@@ -39,6 +39,17 @@
         [
           {
             "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Binary Files": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File1",
             "type": "main",
             "index": 0
           }
@@ -124,7 +135,7 @@
     },
     {
       "parameters": {
-        "fileName": "/files",
+        "fileName": "/",
         "options": {}
       },
       "id": "aaca1af0-dac2-4225-b342-6957ffe96d38",
@@ -134,8 +145,7 @@
       "position": [
         1880,
         460
-      ],
-      "disabled": true
+      ]
     },
     {
       "parameters": {
@@ -152,14 +162,25 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "https://n8n.ppkmh.ru/webhook/815d1b26-65d1-4cfb-b417-435ccb448a72/getmeparams",
         "options": {}
       },
-      "id": "74cf9032-4c9d-4273-bfd3-bfb0c84b5b65",
-      "name": "HTTP Request",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 3,
+      "id": "9ec6e775-a44d-4e61-954a-bfd0e5605b26",
+      "name": "Spreadsheet File1",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "123/*"
+      },
+      "id": "a9880dc4-bdeb-43d1-bb74-0ff0344098d2",
+      "name": "Read Binary Files",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
       "position": [
         1040,
         460
@@ -171,6 +192,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-05T15:50:39.000Z",
-  "versionId": "56c737b4-d9a5-424e-a3e5-3b7489fbca62"
+  "updatedAt": "2023-04-05T16:45:05.000Z",
+  "versionId": "75254d2e-53e0-40aa-8758-3975a0f8e214"
 }
