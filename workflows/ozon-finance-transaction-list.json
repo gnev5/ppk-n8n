@@ -55,6 +55,17 @@
           }
         ]
       ]
+    },
+    "Spreadsheet File1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2023-04-05T12:51:18.194Z",
@@ -68,7 +79,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        820,
+        800,
         460
       ]
     },
@@ -91,7 +102,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"filter\": {\n    \"date\": {\n      \"from\": \"2022-04-01T00:00:00.000Z\",\n      \"to\": \"2022-05-01T00:00:00.000Z\"\n    },\n    \"transaction_type\": \"all\"\n  },\n  \"page\": 1,\n  \"page_size\": 100\n}",
+        "jsonBody": "={\n  \"filter\": {\n    \"date\": {\n      \"from\": \"{{ $json.from }}\",\n      \"to\": \"{{ $json.to }}\"\n    },\n    \"transaction_type\": \"all\"\n  },\n  \"page\": 1,\n  \"page_size\": 100\n}",
         "options": {}
       },
       "id": "421d9ddc-8876-4a1c-aa8b-c0fea6723338",
@@ -99,8 +110,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        1400,
-        220
+        1280,
+        460
       ]
     },
     {
@@ -121,7 +132,7 @@
       "parameters": {
         "operation": "toFile",
         "options": {
-          "fileName": "category.xls"
+          "fileName": "transactions.xls"
         }
       },
       "id": "baa122b7-bcd2-4e08-b95a-c5e98a212d33",
@@ -129,13 +140,13 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 1,
       "position": [
-        1660,
+        1580,
         460
       ]
     },
     {
       "parameters": {
-        "fileName": "/",
+        "fileName": "transactions.xlsx",
         "options": {}
       },
       "id": "aaca1af0-dac2-4225-b342-6957ffe96d38",
@@ -143,21 +154,8 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        1880,
+        1740,
         460
-      ]
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "5a002f06-f492-40c6-8f4f-ed44eb6cd64a",
-      "name": "Split In Batches1",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 1,
-      "position": [
-        1060,
-        200
       ]
     },
     {
@@ -169,20 +167,20 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 1,
       "position": [
-        1260,
+        1120,
         460
       ]
     },
     {
       "parameters": {
-        "fileSelector": "123/*"
+        "fileSelector": "123/*.xlsx"
       },
       "id": "a9880dc4-bdeb-43d1-bb74-0ff0344098d2",
       "name": "Read Binary Files",
       "type": "n8n-nodes-base.readBinaryFiles",
       "typeVersion": 1,
       "position": [
-        1040,
+        960,
         460
       ]
     }
@@ -192,6 +190,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-05T16:45:05.000Z",
-  "versionId": "75254d2e-53e0-40aa-8758-3975a0f8e214"
+  "updatedAt": "2023-04-05T17:36:38.000Z",
+  "versionId": "b33e2a3d-ab90-4077-b004-00bccfbbd573"
 }
