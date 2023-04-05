@@ -1,0 +1,228 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Read Binary Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Binary Files": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-04-05T17:37:15.010Z",
+  "id": "51",
+  "name": "ozon-finance-transaction-totals",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4b96dda9-d95f-4302-bd59-693c840b60c5",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        800,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-seller.ozon.ru/v3/finance/transaction/totals",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Client-Id",
+              "value": "390716"
+            },
+            {
+              "name": "Api-Key",
+              "value": "cff2cd17-f874-4b01-a803-e8df5d9a9be5"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"filter\": {\n    \"date\": {\n      \"from\": \"{{ $json.from }}\",\n      \"to\": \"{{ $json.to }}\"\n    },\n    \"transaction_type\": \"all\"\n  },\n  \"page\": 1,\n  \"page_size\": 10000\n} ",
+        "options": {}
+      },
+      "id": "833866d2-c4a8-4fe8-8151-6fb0f89cdaa0",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1280,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "result.operations",
+        "options": {}
+      },
+      "id": "86690242-184c-4497-87be-c68472e2a456",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "options": {
+          "fileName": "transactions.xls"
+        }
+      },
+      "id": "8395236b-febb-4d4a-b4fe-17ea05b64604",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        460
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fileName": "transactions.xlsx",
+        "options": {}
+      },
+      "id": "55debeb7-f6cb-403b-92df-031a66d27aeb",
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        460
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "3fcea70e-587e-4554-8c95-e1ac34a68d4d",
+      "name": "Spreadsheet File1",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fileSelector": "123/*.xlsx"
+      },
+      "id": "7742fc10-8556-44f1-b460-f5fba49d824d",
+      "name": "Read Binary Files",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [
+        960,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-seller.ozon.ru/v3/finance/transaction/totals",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Client-Id",
+              "value": "390716"
+            },
+            {
+              "name": "Api-Key",
+              "value": "cff2cd17-f874-4b01-a803-e8df5d9a9be5"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"filter\": {\n    \"date\": {\n      \"from\": \"2022-03-01T00:00:00.001Z\",\n      \"to\": \"2022-04-01T00:00:00.000Z\"\n    },\n    \"transaction_type\": \"all\"\n  },\n  \"page\": 1,\n  \"page_size\": 10000\n}",
+        "options": {}
+      },
+      "id": "561c678f-bf56-4ad5-bf13-76a8f7cbbe14",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1300,
+        740
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-04-05T17:57:23.000Z",
+  "versionId": "78c2eec8-0231-4dcc-8244-3b406ba88816"
+}
