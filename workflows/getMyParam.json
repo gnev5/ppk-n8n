@@ -1,0 +1,15 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2023-04-05T14:59:27.304Z",
+  "id": "47",
+  "name": "getMyParam",
+  "nodes": [],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-04-05T14:59:27.304Z",
+  "versionId": "53478b22-0ff4-4e20-9df0-6a3c2a2d4094"
+}
