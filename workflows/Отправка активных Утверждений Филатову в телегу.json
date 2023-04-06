@@ -385,6 +385,50 @@
         }
       },
       "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "399224802",
+        "text": "=Андрей Евгеньевич, напоминаю Вам, что нужно endthlbnm x",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Утвердить",
+                    "additionalFields": {
+                      "callback_data": "=/ComOK_1"
+                    }
+                  },
+                  {
+                    "text": "Отклонить",
+                    "additionalFields": {
+                      "callback_data": "=/ComReject_1"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {}
+      },
+      "id": "7bf83570-9892-4a17-b767-46238c987f46",
+      "name": "Авдееву4",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        -840,
+        1460
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "17",
+          "name": "ppk_kom_bot"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -415,6 +459,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2023-03-29T17:43:00.000Z",
-  "versionId": "2c8838b4-7cf5-4d22-aca8-b9afc49804bd"
+  "updatedAt": "2023-04-06T18:31:56.000Z",
+  "versionId": "6d38ae28-78d4-47d9-a9c7-e1b5124b2a5c"
 }
