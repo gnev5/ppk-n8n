@@ -146,7 +146,7 @@
     },
     {
       "parameters": {
-        "fileName": "transactions.xlsx",
+        "fileName": "transactions.xls",
         "options": {}
       },
       "id": "aaca1af0-dac2-4225-b342-6957ffe96d38",
@@ -190,6 +190,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-04-05T17:36:38.000Z",
-  "versionId": "b33e2a3d-ab90-4077-b004-00bccfbbd573"
+  "updatedAt": "2023-04-06T14:31:20.000Z",
+  "versionId": "88f23270-8c71-463c-a265-b2b8dbba7409"
 }
