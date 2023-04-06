@@ -1,0 +1,207 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists": {
+      "main": [
+        [
+          {
+            "node": "Item Lists1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists1": {
+      "main": [
+        [
+          {
+            "node": "Item Lists2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists2": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-04-05T09:40:32.069Z",
+  "id": "41",
+  "name": "ozon-category",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7f9ab85f-88c4-43b9-ad84-9a95dfc35ecd",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        820,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-seller.ozon.ru/v2/category/tree",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Client-Id",
+              "value": "390716"
+            },
+            {
+              "name": "Api-Key",
+              "value": "cff2cd17-f874-4b01-a803-e8df5d9a9be5"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4825f291-8b85-4f77-830f-827478dd8be4",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1000,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "result",
+        "options": {}
+      },
+      "id": "37ade0b2-b52f-48d2-9ee7-a95b9fc751fe",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "options": {
+          "fileName": "category.xls"
+        }
+      },
+      "id": "eb7a3191-5ded-478f-aacf-e544e89f9b7e",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "category",
+        "options": {}
+      },
+      "id": "d598ece1-8593-402a-8574-98ea57f31bc6",
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        2100,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "children",
+        "options": {}
+      },
+      "id": "d6560538-9f5a-455a-8700-b55a6487855f",
+      "name": "Item Lists1",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "children",
+        "options": {}
+      },
+      "id": "fc584e5e-0400-4216-aadf-87c97e6bb7af",
+      "name": "Item Lists2",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        1660,
+        460
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-04-06T13:55:38.366Z",
+      "updatedAt": "2023-04-06T13:55:38.366Z",
+      "id": "23",
+      "name": "ozon"
+    },
+    {
+      "createdAt": "2023-04-06T13:56:09.651Z",
+      "updatedAt": "2023-04-06T13:56:09.651Z",
+      "id": "25",
+      "name": "file"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-04-06T14:09:19.000Z",
+  "versionId": "44307c7d-dd0e-4ad1-943c-b9eaffe88608"
+}
