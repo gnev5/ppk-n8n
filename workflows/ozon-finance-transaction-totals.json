@@ -223,8 +223,15 @@
   "pinData": {},
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2023-04-06T13:55:38.366Z",
+      "updatedAt": "2023-04-06T13:55:38.366Z",
+      "id": "23",
+      "name": "ozon"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-06T11:24:53.000Z",
-  "versionId": "7f0270c9-7a04-40c5-9eba-eb07f9c54a01"
+  "updatedAt": "2023-04-06T13:57:41.000Z",
+  "versionId": "7a3d5f2b-7ad4-4a79-9c5c-447e54437462"
 }
