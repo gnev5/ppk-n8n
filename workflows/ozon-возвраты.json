@@ -1,0 +1,190 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Список отправлений (версия 3)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists1": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Список отправлений (версия 3)": {
+      "main": [
+        [
+          {
+            "node": "Item Lists1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-04-06T14:11:45.912Z",
+  "id": "59",
+  "name": "ozon-возвраты",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "fa58f799-990d-471e-8427-fc46fff78ef9",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        800,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "options": {
+          "fileName": "возвраты.xls"
+        }
+      },
+      "id": "f30c8f77-2d39-4f95-b74b-c0e6b0461849",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "возвраты.xls",
+        "options": {}
+      },
+      "id": "39970c8d-36f9-4a29-9802-d2efc5102adc",
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "returns",
+        "options": {}
+      },
+      "id": "a899f001-83d0-40de-9a0b-7ec1486f918c",
+      "name": "Item Lists1",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        1260,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-03-01T00:00:00.000Z',\n\t\t\ttd: '2022-06-01T00:00:00.000Z'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-06-01T00:00:00.000Z',\n\t\t\ttd: '2022-09-01T00:00:00.000Z'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-09-01T00:00:00.000Z',\n\t\t\ttd: '2022-12-01T00:00:00.000Z'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-12-01T00:00:00.000Z',\n\t\t\ttd: '2022-05-01T00:00:00.000Z'\n\t\t}\n    }\n];"
+      },
+      "id": "eb6496d3-af57-493c-85f0-e6ee08dd4654",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        960,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-seller.ozon.ru/v3/returns/company/fbs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Client-Id",
+              "value": "390716"
+            },
+            {
+              "name": "Api-Key",
+              "value": "cff2cd17-f874-4b01-a803-e8df5d9a9be5"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\"filter\": {\n\"since\": \"2022-03-01T00:00:00.000Z\",\n\"to\": \"2022-06-01T23:59:59.000Z\"\n},\n  \"limit\": 1000,\n  \"offset\": 0,\n  \"translit\": true,\n  \"with\": {\n    \"analytics_data\": true,\n    \"financial_data\": true\n  }\n}",
+        "options": {}
+      },
+      "id": "78853557-fa99-452b-a87f-f7eb1ae12f0c",
+      "name": "Список отправлений (версия 3)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1120,
+        460
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2023-04-03T12:50:37.559Z",
+      "updatedAt": "2023-04-03T12:50:37.559Z",
+      "id": "19",
+      "name": "js"
+    },
+    {
+      "createdAt": "2023-04-06T13:55:38.366Z",
+      "updatedAt": "2023-04-06T13:55:38.366Z",
+      "id": "23",
+      "name": "ozon"
+    },
+    {
+      "createdAt": "2023-04-06T13:56:09.651Z",
+      "updatedAt": "2023-04-06T13:56:09.651Z",
+      "id": "25",
+      "name": "file"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2023-04-06T14:47:25.000Z",
+  "versionId": "51d767df-9d52-496f-b272-91923f9d50fd"
+}
