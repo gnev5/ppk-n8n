@@ -337,6 +337,37 @@
         620
       ],
       "webhookId": "e41ade5f-d3df-4d99-9a66-d7e0fe9260f6"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-seller.ozon.ru/v1/conditional-cancellation/list",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Client-Id",
+              "value": "390716"
+            },
+            {
+              "name": "Api-Key",
+              "value": "cff2cd17-f874-4b01-a803-e8df5d9a9be5"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"filters\": {\n    \"state\": \"ALL\"\n  },\n  \"limit\": 2,\n  \"offset\": 0,\n  \"with\": {\n    \"counters\": true\n  }\n}",
+        "options": {}
+      },
+      "id": "da951da3-4962-4ed2-ab07-c7deb6e192da",
+      "name": "список заявок на отмену rFBS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1080,
+        720
+      ]
     }
   ],
   "pinData": {},
@@ -363,6 +394,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-06T14:49:17.441Z",
-  "versionId": "7b6a3211-fc5b-44d4-ae21-0e600979bae9"
+  "updatedAt": "2023-04-06T16:12:36.000Z",
+  "versionId": "c60c916f-829b-4516-8feb-869a93b9790e"
 }
