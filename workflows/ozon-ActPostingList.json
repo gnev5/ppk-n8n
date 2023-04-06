@@ -292,13 +292,13 @@
       "type": "n8n-nodes-base.spreadsheetFile",
       "typeVersion": 1,
       "position": [
-        1960,
-        680
+        1940,
+        840
       ]
     },
     {
       "parameters": {
-        "fileName": "отправления.xlsx",
+        "fileName": "отправления.xls",
         "options": {}
       },
       "id": "e0ec6e95-642a-4b5f-9b45-5e68395e25a4",
@@ -306,23 +306,9 @@
       "type": "n8n-nodes-base.writeBinaryFile",
       "typeVersion": 1,
       "position": [
-        2100,
-        680
-      ]
-    },
-    {
-      "parameters": {
-        "jsCode": "return [\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-03-01',\n\t\t\ttd: '2022-06-01'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-06-01',\n\t\t\ttd: '2022-09-01'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-09-01',\n\t\t\ttd: '2022-12-01'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-12-01',\n\t\t\ttd: '2023-04-06'\n\t\t}\n    }\n];"
-      },
-      "id": "8d98d834-2404-475f-bbc8-0c1bbaca51cd",
-      "name": "Code1",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 1,
-      "position": [
-        960,
+        2120,
         840
-      ],
-      "disabled": true
+      ]
     },
     {
       "parameters": {
@@ -356,8 +342,27 @@
   "pinData": {},
   "settings": {},
   "staticData": null,
-  "tags": [],
+  "tags": [
+    {
+      "createdAt": "2023-04-03T12:50:37.559Z",
+      "updatedAt": "2023-04-03T12:50:37.559Z",
+      "id": "19",
+      "name": "js"
+    },
+    {
+      "createdAt": "2023-04-06T13:55:38.366Z",
+      "updatedAt": "2023-04-06T13:55:38.366Z",
+      "id": "23",
+      "name": "ozon"
+    },
+    {
+      "createdAt": "2023-04-06T13:56:09.651Z",
+      "updatedAt": "2023-04-06T13:56:09.651Z",
+      "id": "25",
+      "name": "file"
+    }
+  ],
   "triggerCount": 0,
-  "updatedAt": "2023-04-06T12:56:14.000Z",
-  "versionId": "872afb18-2305-4826-835e-3f751b1873a2"
+  "updatedAt": "2023-04-06T13:56:42.000Z",
+  "versionId": "85cfda8e-a5b8-4f41-8479-b798993d408d"
 }
