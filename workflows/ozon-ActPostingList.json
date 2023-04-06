@@ -1,0 +1,363 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking \"Execute Workflow\"": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Список актов по отгрузкам": {
+      "main": [
+        [
+          {
+            "node": "Item Lists1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Список актов по отгрузкам",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists1": {
+      "main": [
+        [
+          {
+            "node": "Item Lists",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Lists": {
+      "main": [
+        [
+          {
+            "node": "Spreadsheet File",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Список отправлений в акте": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spreadsheet File1": {
+      "main": [
+        [
+          {
+            "node": "Write Binary File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [
+          {
+            "node": "Список отправлений в акте",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Spreadsheet File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-04-06T12:06:39.836Z",
+  "id": "55",
+  "name": "ozon-ActPostingList",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "084d984c-62c3-4ebf-a9f7-c329c374c667",
+      "name": "When clicking \"Execute Workflow\"",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        800,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "options": {
+          "fileName": "отгрузки.xls"
+        }
+      },
+      "id": "9622c45f-a0af-44fb-abe2-8b0ec9c58a8e",
+      "name": "Spreadsheet File",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        1860,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "откгузки.xls",
+        "options": {}
+      },
+      "id": "cb7323c7-3c76-4458-93f3-7f96066c9750",
+      "name": "Write Binary File",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        2060,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-seller.ozon.ru/v2/posting/fbs/act/list",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Client-Id",
+              "value": "390716"
+            },
+            {
+              "name": "Api-Key",
+              "value": "cff2cd17-f874-4b01-a803-e8df5d9a9be5"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"filter\": {\n    \"date_from\": \"{{ $json.fd }}\",\n    \"date_to\": \"{{ $json.td }}\",\n    \"integration_type\": \"ozon\"\n  },\n  \"limit\": 50\n}",
+        "options": {}
+      },
+      "id": "d289f60c-23f9-4d19-b882-321124fc8fee",
+      "name": "Список актов по отгрузкам",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1100,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "result",
+        "options": {}
+      },
+      "id": "e5a0ee87-ec2a-47c5-9fe7-50e8c474baab",
+      "name": "Item Lists1",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        1260,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-03-01',\n\t\t\ttd: '2022-06-01'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-06-01',\n\t\t\ttd: '2022-09-01'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-09-01',\n\t\t\ttd: '2022-12-01'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-12-01',\n\t\t\ttd: '2023-04-06'\n\t\t}\n    }\n];"
+      },
+      "id": "b64120e6-91d1-4ed9-95fc-0bc89a28b6dc",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        960,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-seller.ozon.ru/v2/posting/fbs/act/get-postings",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Client-Id",
+              "value": "390716"
+            },
+            {
+              "name": "Api-Key",
+              "value": "cff2cd17-f874-4b01-a803-e8df5d9a9be5"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n\"id\": {{ $json.id }}\n} ",
+        "options": {}
+      },
+      "id": "18103d4e-5300-4f7d-a89e-3f689c190e48",
+      "name": "Список отправлений в акте",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1640,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "removeDuplicates",
+        "compare": "selectedFields",
+        "fieldsToCompare": {
+          "fields": [
+            {
+              "fieldName": "id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e46c0285-7002-497b-a978-5f1665a77cc1",
+      "name": "Item Lists",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "toFile",
+        "options": {
+          "fileName": "отправления.xls"
+        }
+      },
+      "id": "74dd19fd-428e-4d3d-a71f-328b9f4cbf3e",
+      "name": "Spreadsheet File1",
+      "type": "n8n-nodes-base.spreadsheetFile",
+      "typeVersion": 1,
+      "position": [
+        1960,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "отправления.xlsx",
+        "options": {}
+      },
+      "id": "e0ec6e95-642a-4b5f-9b45-5e68395e25a4",
+      "name": "Write Binary File1",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        2100,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-03-01',\n\t\t\ttd: '2022-06-01'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-06-01',\n\t\t\ttd: '2022-09-01'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-09-01',\n\t\t\ttd: '2022-12-01'\n\t\t}\n\t},\n\t{\n\t\tjson: {\n\t\t\tfd: '2022-12-01',\n\t\t\ttd: '2023-04-06'\n\t\t}\n    }\n];"
+      },
+      "id": "8d98d834-2404-475f-bbc8-0c1bbaca51cd",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        960,
+        840
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "116a3c6f-c0a2-4c20-9f02-6c7f8822315b",
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "eb0798ea-cb84-4056-8484-375e3a076806",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        1780,
+        620
+      ],
+      "webhookId": "d7d51e30-8b56-453f-b7d4-3bb179245003"
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-04-06T12:56:14.000Z",
+  "versionId": "872afb18-2305-4826-835e-3f751b1873a2"
+}
